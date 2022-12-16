@@ -1,2 +1,10 @@
 # excel_to_pandas
-C++ Library to convert Excel worksheets pandas dataframe
+C++ Library to convert Excel worksheets to pandas dataframes.
+
+# Performance:
+
+# How it works:
+
+# My site:
+
+# More
