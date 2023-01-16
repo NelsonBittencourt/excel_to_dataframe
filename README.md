@@ -10,7 +10,9 @@ On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, th
 Under construction.
 
 # My site:
-http://www.nrbenergia.somee.com/
+
+http://www.nrbenergia.somee.com/ or 
+
 https://nrbenergia.azurewebsites.net/
 
 # More
