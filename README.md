@@ -1,6 +1,8 @@
 # excel_to_pandas
 C++ Library to convert Excel worksheets to pandas dataframes.
+
 This software is in testing phase.
+
 Feel free to test it out. If you want to share your experience, send me an email (nbittencourt@hotmail.com).
 
 # Performance:
@@ -10,8 +12,7 @@ On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, th
 Under construction.
 
 # My site:
-
-http://www.nrbenergia.somee.com/ or 
+http://www.nrbenergia.somee.com/  
 
 https://nrbenergia.azurewebsites.net/
 
