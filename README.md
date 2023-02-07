@@ -14,9 +14,11 @@ Under construction.
 # Installation:
 
 PyPI:
+'''Python
 pip install excel-to-dataframe==0.2.5
 
-Anacondo/Miniconda:
+Anacondq/Miniconda:
+'''Python
 conda install -c nbittencourt excel_to_dataframe
 
 # My site:
