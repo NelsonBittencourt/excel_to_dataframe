@@ -23,7 +23,7 @@ pip install excel-to-dataframe==0.2.5
 conda install -c nbittencourt excel_to_dataframe
 ```
 
-# My site:
+# Personal sites:
 http://www.nrbenergia.somee.com/  
 
 https://nrbenergia.azurewebsites.net/
