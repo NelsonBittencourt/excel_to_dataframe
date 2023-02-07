@@ -8,8 +8,8 @@
 
 # *********** Imports **********
 
-import excel_to_df as etd       # Excel to Pandas functions
-import pandas as pd             # Pandas
+import excel_to_dataframe.excel_to_pandas as etd       	# Excel to Pandas functions
+import pandas as pd             						# Pandas
 
 
 
