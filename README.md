@@ -15,12 +15,12 @@ Under construction.
 
 ### PyPI:
 ```Python
-pip install excel-to-dataframe==0.2.5
+pip install excel-to-dataframe==0.2.5 (unavailable, updating to 0.2.51 comming soon).
 ```
 
 ### Anaconda/Miniconda:
 ```Python
-conda install -c nbittencourt excel_to_dataframe
+conda install -c nbittencourt excel_to_dataframe (unavailable, updating to 0.2.51 comming soon).
 ```
 
 # Personal sites:
