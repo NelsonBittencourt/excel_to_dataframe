@@ -11,6 +11,11 @@ On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, th
 # How it works:
 Under construction.
 
+# Installation:
+
+PyPI:
+pip install excel-to-dataframe==0.2.5
+
 # My site:
 http://www.nrbenergia.somee.com/  
 
