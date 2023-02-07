@@ -14,14 +14,14 @@ Under construction.
 # Installation:
 
 PyPI:
-'''Python
+```Python
 pip install excel-to-dataframe==0.2.5
-'''
+```
 
 Anacondq/Miniconda:
-'''Python
+```Python
 conda install -c nbittencourt excel_to_dataframe
-'''
+```
 
 # My site:
 http://www.nrbenergia.somee.com/  
