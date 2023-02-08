@@ -1,5 +1,5 @@
 # excel_to_dataframe
-C++ Library to convert Excel worksheets to Pandas (folder python) or Microsoft (folder csharp) dataframes.
+C++ Library to convert Excel worksheets to Pandas (folder python) or Microsoft (folder csharp) dataframes (Windows only).
 
 This software is in testing phase.
 
@@ -11,16 +11,20 @@ On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, th
 # How it works:
 Under construction.
 
-# Installation:
+# Installation (Python version only. Microsoft version comming soon):
 
-### PyPI:
+## PyPI:
 ```Python
-pip install excel-to-dataframe==0.2.5 (unavailable, updating to 0.2.51 comming soon).
+pip install excel-to-dataframe==0.2.53 pip install
 ```
 
-### Anaconda/Miniconda:
-```Python
-conda install -c nbittencourt excel_to_dataframe (unavailable, updating to 0.2.51 comming soon).
+## Anaconda/Miniconda:
+```Python 3.9
+conda install -c nbittencourt excel_to_dataframe 
+```
+
+```Python 3.10
+conda install -c nbittencourt excel_to_dataframe 
 ```
 
 # Personal sites:
