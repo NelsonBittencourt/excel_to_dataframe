@@ -1,19 +1,20 @@
-# ***************************************************
+# ****************************************************************
+# excel_to_pandas.py
 # Python script to test Excel to Pandas Dataframe DLL
 # Created by Nelson Rossi Goulart Bittencourt.
-# Github: https://github.com/nelsonbittencourt
-# 14/12/2022 (dd/mm/yyyy).
-# ***************************************************
+# Github: https://github.com/nelsonbittencourt/excel_to_dataframe
+# Last change: 08/02/2023 (dd/mm/yyyy).
+# Version: 0.2.53
+# License: MIT
+# ****************************************************************
 
-# TODO: 1) compare dataframes; 2) rename dll functions and 3) change separator in dll string
 
 # *********** Imports **********
 
-import ctypes as ct         # For access dll
-import pandas as pd         # Pandas
-from io import StringIO     # To convert csv to binary
-import timeit    			# Benchmarks
-import pathlib				# To get path of this file
+import ctypes as ct         # For dll access.
+import pandas as pd         # Pandas (needs openpyxl to open Excel files).
+from io import StringIO     # To convert csv to binary.
+import pathlib				# To get path of this file.
 
 
 # *********** Setup **********
@@ -22,11 +23,14 @@ import pathlib				# To get path of this file
 dll_path = "{}\\{}".format(pathlib.Path(__file__).parent.resolve() ,'excel_to_df.dll')
 
 
-
 # *********** Initializations ********** 
 
 # Loads dll
-wsdf_dll = ct.CDLL(dll_path,winmode=0x8)
+try:
+    wsdf_dll = ct.CDLL(dll_path,winmode=0x8)
+except:
+    wsdf_dll = ct.CDLL('excel_to_df.dll',winmode=0x8)
+
 
 # 'Instantianting' dll functions
 
@@ -54,12 +58,11 @@ dll_version = wsdf_dll.version
 dll_version.restype = ct.c_char_p
 
 
-
-# *********** Pandas Functions ********** 
+# *********** Functions ********** 
 
 def get_dll_version():
     """
-    Gets dll version.
+    Gets dll version as string.
 
     Arguments:
     None
@@ -70,15 +73,16 @@ def get_dll_version():
     Requires:
     excel_to_df.dll
 
+    Version 0.2.51
+
     """             
     tmp = dll_version()       
     return tmp.decode('utf-8')
 
 
-
 def open_excel(excel_file_name):
     """
-    Opens an Excel file and loads shared strings, styles (for dates only) and sheets names.
+    Opens an Excel file and loads shared strings, styles (for dates only) and worksheet names.
 
     Arguments:
     excel_file_name - string with full path to Excel file.
@@ -91,9 +95,10 @@ def open_excel(excel_file_name):
     Requires:
     excel_to_df.dll
 
+    Version 0.2.51
+
     """        
     return dll_open_excel(excel_file_name.encode())    
-
 
 
 def ws_to_df(sheet_name, multi_thread=0):
@@ -108,6 +113,8 @@ def ws_to_df(sheet_name, multi_thread=0):
 
     Requires:
     Pandas, ctypes, io.StringIO, excel_to_df.dll
+
+    Version 0.2.5
 
     """
     # Gets worksheet data
@@ -124,10 +131,9 @@ def ws_to_df(sheet_name, multi_thread=0):
         return -1
 
 
-
 def split_df(df, split_string, col_search, header_offset=0):
     """
-    Splits a dataframe to x dataframes considering 'split_string' as table separator.
+    Splits a dataframe to 'x' dataframes considering 'split_string' as table separator.
 
     Arguments:
     df              -   Pandas dataframe to split;
@@ -140,6 +146,8 @@ def split_df(df, split_string, col_search, header_offset=0):
     
     Requires:
     pandas.
+
+    Version 0.2.51
 
     """
 
@@ -163,171 +171,6 @@ def split_df(df, split_string, col_search, header_offset=0):
         del df2
 
     return ld
-
-
-
-def test_dll(excel_file_full_path, excel_worksheet_name, multi_thread=0):
-    """
-    Using dll, opens a Excel file and converts a worksheet to dataframe
-    This rotine is used by benchmark function.
-    
-    Arguments:
-    excel_file_full_path    - (string) full path for Excel file and
-    excel_worksheet_name    - (string) worksheet name for data extration.
-
-    Returns:
-    None
-
-    Requires:
-    ctypes, excel_to_csv.dll
-
-    """
-    ret = open_excel(excel_file_full_path)
-    
-    # If Excel file is loaded, tries to load worksheet.
-    if (ret==0):        
-        tmp_df = ws_to_df(excel_worksheet_name,multi_thread)
-    else:
-        print('Error on load Excel! Error number:{:d}'.format(ret))
-        
-    dll_close_excel()    
-
-
-
-def test_pure_pandas(excel_file_full_path,excel_worksheet_name):
-    """
-    Using Pandas, opens a Excel file and converts a worksheet to dataframe.
-    This rotine is used by benchmark function.
-
-    Arguments:
-    excel_file_full_path    - (string) full path for Excel file and
-    excel_worksheet_name    - (string) worksheet name for data extration.
-
-    Returns:
-    None.
-
-    Requires:
-    Pandas.
-
-    """
-
-    # Creates an Excel object.
-    excel = pd.ExcelFile(excel_file_full_path)
-
-    # Gets dataframe from specified worksheet.
-    tmp_df = pd.read_excel(excel, sheet_name=excel_worksheet_name)    
-    
-    # Garbage collection.
-    del excel
-
-
-
-def benchmarks(save_csvs=False):
-    """
-    Runs benchmarks with two large files from CCEE (Brazilian Chamber for the Commercialisation of Electrical Energy).
-    
-    Arguments:
-    None.
-
-    Returns:
-    Strings to console.
-
-    Requires:
-    Pandas, excel_to_df.dll, test_dll, test_pure_pandas.
-
-    """
-
-    # Excel files and worksheets for benchmarking
-    excel_files = ['benchmarks/infomercado_individuais_2022.xlsx','benchmarks/infomercado_contratos.xlsx']
-    sheet_names  = ['003 Consumo','Contratos Distribuidoras']
-
-    for a in range(0,2):
-        excel_file = excel_files[a]
-        sheet_name = sheet_names[a]
-
-        print('**************************************************************************************************')
-        print('Benchmark test {} - Excel File \'{}\', Sheet \'{}\''.format(a+1,excel_file,sheet_name))
-        print('')        
-        
-        # 'tmp_test' is a local pointer to the function. Allows usage of 'timeit' inside functions.
-        tmp_test = test_dll
-
-        # Single thread
-        dll_time_st = timeit.timeit("tmp_test(excel_file,sheet_name)", number=1,globals=locals())
-        
-        # Multi-thread
-        dll_time_mt = timeit.timeit("tmp_test(excel_file,sheet_name,1)", number=1,globals=locals())
-        
-        # # 'tmp_test' is a local pointer to the function. Allows usage of 'timeit' inside functions.
-        # tmp_test = test_pure_pandas
-        # pd_time = timeit.timeit("tmp_test(excel_file,sheet_name)", number=1, globals=locals())
-        pd_time = 400
-        
-        # Calculates the ratio pandas time / dll time.
-        ratio_st = pd_time/dll_time_st
-        ratio_mt = pd_time/dll_time_mt
-        
-        # Prints resutls.
-        print('')
-        print('**************************************************************************************************')
-        print('Results:')
-        print('')
-        print('A) Single Thread')
-        print('Pandas..................... {:.2f} seconds.'.format(pd_time))
-        print('DLL (single thread)........ {:.2f} seconds.'.format(dll_time_st))
-        print('--> DLL is................. {:.2f} times faster than Pandas.'.format(ratio_st))
-        print('')
-        print('B) Multi Thread')
-        print('Pandas..................... {:.2f} seconds.'.format(pd_time))
-        print('DLL (multi-thread)......... {:.2f} seconds.'.format(dll_time_mt))
-        print('--> DLL is................. {:.2f} times faster than Pandas.'.format(ratio_mt))
-        print('')
-        print('C) Single vrs Multi Thread')
-        print('DLL (single thread)........ {:.2f} seconds.'.format(dll_time_st))
-        print('DLL (multi-thread)......... {:.2f} seconds.'.format(dll_time_mt))
-        print('--> Multi/Single........... {:.2f}'.format(dll_time_mt/dll_time_st))
-
-
-
-def get_csvs(excel_file_full_path,excel_worksheet_name):
-    """
-
-    Opens an Excel file name, loads a worksheet data and saves to csv.
-
-    Arguments:
-    excel_file_full_path    - (string) Excel file full path and
-    excel_worksheet_name    - (string) Excel worksheet name.
-
-    Returns:
-    None.
-
-    Requires:
-    Pandas, excel_to_df.dll.
-    
-    """
-    
-    # Opens Excel file. 
-    ret = open_excel(excel_file_full_path)
-    
-    # Converts worksheet data to Pandas dataframe (dll single thread).
-    tmp_df = ws_to_df(excel_worksheet_name,multi_thread=0)
-    tmp_df.to_csv(excel_worksheet_name + '_st.csv',sep=';',decimal=',')
-    dll_close_excel()    
-    del tmp_df
-
-    # Converts worksheet data to Pandas dataframe (dll multi thread).
-    ret = open_excel(excel_file_full_path)
-    tmp_df = ws_to_df(excel_worksheet_name,multi_thread=1)
-    tmp_df.to_csv(excel_worksheet_name + '_mt.csv',sep=';',decimal=',')
-    dll_close_excel()    
-    del tmp_df
-    
-    # Converts worksheet data to Pandas dataframe (Pandas)
-    excel = pd.ExcelFile(excel_file_full_path)    
-    tmp_df = pd.read_excel(excel, sheet_name=excel_worksheet_name)   
-    tmp_df.to_csv(excel_worksheet_name + '_pd.csv',sep=';',decimal=',')
-    del tmp_df
-
 
 
 # *********** Entry point **********
