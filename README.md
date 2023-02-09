@@ -19,11 +19,6 @@ pip install excel-to-dataframe==0.2.53 pip install
 ```
 
 ## Anaconda/Miniconda:
-###Python 3.9
-```Python
-conda install -c nbittencourt excel_to_dataframe 
-```
-###Python 3.10
 ```Python
 conda install -c nbittencourt excel_to_dataframe 
 ```
