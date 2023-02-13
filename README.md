@@ -15,7 +15,7 @@ Under construction.
 
 ## PyPI:
 ```Python
-pip install excel-to-dataframe==0.2.53 pip install
+pip install excel-to-dataframe==0.2.53
 ```
 
 ## Anaconda/Miniconda:
