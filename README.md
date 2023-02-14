@@ -6,7 +6,7 @@ This software is in testing phase.
 Feel free to test it out. If you want to share your experience, send me an email (nbittencourt@hotmail.com).
 
 # Performance (python test only):
-On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll was between 12 and 25 times faster than Pandas.
+On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll was between 5 and 20 times faster than Pandas.
 
 # How it works:
 Under construction.
@@ -15,23 +15,18 @@ Under construction.
 
 ## PyPI:
 ```Python
-pip install excel-to-dataframe==0.2.53
+pip install excel-to-dataframe==0.2.54
 ```
 
 ## Anaconda/Miniconda:
 ### Python 3.9
 ```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.53=py39_0
+conda install -c nbittencourt excel_to_dataframe=0.2.54=py39_0
 ```
 
 ### Python 3.10
 ```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.53=py310_0
-```
-
-### Python 3.11
-```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.53=py311_0
+conda install -c nbittencourt excel_to_dataframe=0.2.54=py310_0
 ```
 
 
