@@ -3,8 +3,8 @@
 # Python script showing dll usage and benchmarks.
 # Created by Nelson Rossi Goulart Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 08/02/2023 (dd/mm/yyyy).
-# Version: 0.2.53
+# Last change: 13/02/2023 (dd/mm/yyyy).
+# Version: 0.2.54
 # License: MIT
 # ****************************************************************
 
@@ -17,18 +17,20 @@
 
 
 # *********** Imports **********
-
 import pandas as pd      
-import timeit       					
+import timeit  
+import os     					
+
+import excel_to_dataframe.excel_to_pandas as etd    
 
 # Tries to import from installed packet (PyPI or Anaconda/Miniconda)
 # or from local file (direct download files from Github).
-try:
-    import excel_to_dataframe.excel_to_pandas as etd
-except:
-    # import excel_to_pandas as etd	
-    pass						
+#try:
+#    import excel_to_dataframe.excel_to_pandas as etd    
+#except ImportError as e:
+#    import excel_to_pandas as etd	
 
+absolute_path = os.path.abspath(os.path.dirname(__file__))
 
 # *********** Functions **********
 
@@ -49,7 +51,7 @@ def main():
     """
 
     # Excel file and worksheet name to work with.
-    excel_file = 'benchmarks/infomercado_individuais_2022.xlsx'
+    excel_file = os.path.join(absolute_path,'benchmarks/infomercado_individuais_2022.xlsx')
     sheet_name = '003 Consumo'
     
     # Open Excel file.
@@ -148,11 +150,11 @@ def benchmarks(save_csvs=False):
     sheet_names  = ['003 Consumo','Contratos Distribuidoras']
 
     for a in range(0,2):
-        excel_file = excel_files[a]
+        excel_file = os.path.join(absolute_path, excel_files[a])
         sheet_name = sheet_names[a]
 
         print('**************************************************************************************************')
-        print('Benchmark test {} - Excel File \'{}\', Sheet \'{}\''.format(a+1,excel_file,sheet_name))
+        print('Benchmark test {} - Excel File \'{}\', Sheet \'{}\''.format(a+1,excel_files[a],sheet_name))
         print('')        
         
         # 'tmp_test' is a local pointer to the function. Allows usage of 'timeit' inside functions.
@@ -240,19 +242,21 @@ if __name__ == "__main__":
     
     # Gets and prints dll version.
     print (etd.get_dll_version())
+    exit(0)
         
     # Runs benchmarks
     benchmarks()
 
-    # # Saves csvs to comparisons;
+    #  Saves csvs to comparisons;
     print('')
     print('**************************************************************************************************')
     print('Converting worksheets to csvs:')
-    get_csvs('benchmarks/infomercado_individuais_2022.xlsx', '003 Consumo')    
-    get_csvs('benchmarks/infomercado_contratos.xlsx', 'Contratos Distribuidoras')
+    get_csvs(os.path.join(absolute_path,'benchmarks/infomercado_individuais_2022.xlsx'), '003 Consumo')    
+    get_csvs(os.path.join(absolute_path, 'benchmarks/infomercado_contratos.xlsx'), 'Contratos Distribuidoras')
+    
     print('Done!')
     
-    # # Dll usage example.
+    # # Another dll usage example.
     # main()
 
     

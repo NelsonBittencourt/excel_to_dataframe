@@ -3,34 +3,48 @@
 # Python script to test Excel to Pandas Dataframe DLL
 # Created by Nelson Rossi Goulart Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 08/02/2023 (dd/mm/yyyy).
-# Version: 0.2.53
+# Last change: 13/02/2023 (dd/mm/yyyy).
+# Version: 0.2.54
 # License: MIT
 # ****************************************************************
 
 
 # *********** Imports **********
-
 import ctypes as ct         # For dll access.
 import pandas as pd         # Pandas (needs openpyxl to open Excel files).
 from io import StringIO     # To convert csv to binary.
-import pathlib				# To get path of this file.
+import os				    # To get path of this file and dll.
+import platform             # To check for Windows or Linux.
 
 
 # *********** Setup **********
+# Sets up full path to 'excel_to_df.dll' or 'excel_to_df.so'
 
-# Sets up full path to excel_to_df.dll
-dll_path = "{}\\{}".format(pathlib.Path(__file__).parent.resolve() ,'excel_to_df.dll')
+is_windows = True
+dll_file = 'excel_to_df.dll'
+
+if (platform.uname()[0]!="Windows"): 
+    is_windows = False
+    dll_file = 'excel_to_df.so'
+
+abs_path = os.path.abspath(os.path.dirname(__file__))
+dll_path = os.path.join(abs_path,dll_file)
 
 
 # *********** Initializations ********** 
 
-# Loads dll
+# Loads dll. Tries to load installed version. Otherwise, tries current dir.
 try:
-    wsdf_dll = ct.CDLL(dll_path,winmode=0x8)
-except:
-    wsdf_dll = ct.CDLL('excel_to_df.dll',winmode=0x8)
-
+    if (is_windows):
+        wsdf_dll = ct.CDLL(dll_path,winmode=0x8)
+    else:
+         wsdf_dll = ct.cdll.LoadLibrary(dll_path)         
+except OSError as e:
+    if (is_windows):
+        wsdf_dll = ct.CDLL(dll_file,winmode=0x8)
+    else:
+        wsdf_dll = ct.cdll.LoadLibrary(dll_file)
+    
 
 # 'Instantianting' dll functions
 
