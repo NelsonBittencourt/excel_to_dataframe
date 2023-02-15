@@ -11,7 +11,7 @@ On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, th
 # How it works:
 Under construction.
 
-# Installation (Python version only. Microsoft version comming soon):
+# Installation (Windows and Linux):
 
 ## PyPI:
 ```Python
