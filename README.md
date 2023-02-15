@@ -18,18 +18,6 @@ Under construction.
 pip install excel-to-dataframe==0.2.54
 ```
 
-## Anaconda/Miniconda:
-### Python 3.9
-```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.54=py39_0
-```
-
-### Python 3.10
-```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.54=py310_0
-```
-
-
 # Personal site:
 http://www.nrbenergia.somee.com/  
 
