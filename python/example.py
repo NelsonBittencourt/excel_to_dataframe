@@ -3,8 +3,8 @@
 # Python script showing dll usage and benchmarks.
 # Created by Nelson Rossi Goulart Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 13/02/2023 (dd/mm/yyyy).
-# Version: 0.2.54
+# Last change: 18/02/2023 (dd/mm/yyyy).
+# Version: 0.2.56
 # License: MIT
 # ****************************************************************
 
@@ -21,16 +21,13 @@ import pandas as pd
 import timeit  
 import os     					
 
-import excel_to_dataframe.excel_to_pandas as etd    
-
 # Tries to import from installed packet (PyPI or Anaconda/Miniconda)
 # or from local file (direct download files from Github).
-#try:
-#    import excel_to_dataframe.excel_to_pandas as etd    
-#except ImportError as e:
-#    import excel_to_pandas as etd	
+try:
+   import excel_to_dataframe.excel_to_pandas as etd    
+except ImportError as e:
+   import excel_to_pandas as etd	
 
-absolute_path = os.path.abspath(os.path.dirname(__file__))
 
 # *********** Functions **********
 
@@ -242,7 +239,7 @@ if __name__ == "__main__":
     
     # Gets and prints dll version.
     print (etd.get_dll_version())
-    exit(0)
+    #exit(0)
         
     # Runs benchmarks
     benchmarks()
