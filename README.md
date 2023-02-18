@@ -13,9 +13,23 @@ Under construction.
 
 # Python installation (Windows and Linux):
 
+Python 3.9, 3.10 and 3.11 are supported.
+
 ## PyPI:
 ```Python
-pip install excel-to-dataframe==0.2.54
+pip install excel-to-dataframe
+```
+
+## Anaconda/Miniconda:
+```Python
+conda install -c nbittencourt excel_to_dataframe
+```
+
+To force specific python version, run one of the following:
+```Python
+conda install -c nbittencourt excel_to_dataframe=0.2.56=py39_0
+conda install -c nbittencourt excel_to_dataframe=0.2.56=py310_0
+conda install -c nbittencourt excel_to_dataframe=0.2.56=py311_0
 ```
 
 # Personal site:
