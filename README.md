@@ -11,11 +11,11 @@ On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, th
 
 ##Windows, Python:
 
-<img src="images/perf_windows_python.png" width="200"> 
+<img src="images/perf_windows_python.png" width="400"> 
 
 ##Linux (Ubuntu), Python:
 
-<img src="images/perf_linux_python.png" width="200"> <img src="mapa_home_2.png" width="200">
+<img src="images/perf_linux_python.png" width="400">
 
 
 # Python installation (Windows and Linux):
