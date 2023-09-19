@@ -3,8 +3,8 @@
 # Python script to test Excel to Pandas Dataframe DLL
 # Created by Nelson Rossi Goulart Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 18/02/2023 (dd/mm/yyyy).
-# Version: 0.2.56
+# Last change: 19/09/2023 (dd/mm/yyyy).
+# Version: 0.2.58
 # License: MIT
 # ****************************************************************
 
@@ -30,20 +30,17 @@ if (platform.uname()[0]!="Windows"):
 abs_path = os.path.abspath(os.path.dirname(__file__))
 dll_path = os.path.join(abs_path,dll_file)
 
-
 # *********** Initializations ********** 
 
 # Loads dll. Tries to load installed version. Otherwise, tries current dir.
 try:
     if (is_windows):
-        wsdf_dll = ct.CDLL(dll_path,winmode=0x00000001)
+        wsdf_dll = ct.CDLL(dll_path)        
     else:
          wsdf_dll = ct.cdll.LoadLibrary(dll_path)         
 except OSError as e:
-    if (is_windows):
-        wsdf_dll = ct.CDLL(dll_file,winmode=0x00000001)
-    else:
-        wsdf_dll = ct.cdll.LoadLibrary(dll_file)
+    print('Error loading dll file! Error:' , e)
+    exit(-1)
     
 
 # 'Instantianting' dll functions
@@ -53,13 +50,8 @@ dll_open_excel = wsdf_dll.openExcel
 dll_open_excel.argtypes = [ct.c_char_p]
 dll_open_excel.restype = ct.c_int
 
-# Gets sheet data function (single thread)
-dll_get_sheet = wsdf_dll.getSheet
-dll_get_sheet.argtypes = [ct.c_char_p]
-dll_get_sheet.restype = ct.c_char_p
-
-# Gets sheet data function (multi-thread)
-dll_get_sheet_mt = wsdf_dll.getSheetMT
+# Gets sheet data function
+dll_get_sheet_mt = wsdf_dll.getSheetData
 dll_get_sheet_mt.argtypes = [ct.c_char_p]
 dll_get_sheet_mt.restype = ct.c_char_p
 
@@ -74,7 +66,7 @@ dll_version.restype = ct.c_char_p
 
 # *********** Functions ********** 
 
-def get_dll_version():
+def version():
     """
     Gets dll version as string.
 
@@ -87,7 +79,7 @@ def get_dll_version():
     Requires:
     excel_to_df.dll
 
-    Version 0.2.51
+    Version 0.2.52
 
     """             
     tmp = dll_version()       
@@ -102,20 +94,40 @@ def open_excel(excel_file_name):
     excel_file_name - string with full path to Excel file.
 
     Returns:
-    None    - success;
-    -1      - file not found or
-    -2      - file found, invalid Excel.
+     0  - success;
+    -1  - file not found or
+    -2  - file found, invalid Excel.
     
     Requires:
-    excel_to_df.dll
+    excel_to_df.dll or excel_to_df.so
 
-    Version 0.2.51
+    Version 0.2.52
 
     """        
-    return dll_open_excel(excel_file_name.encode())    
+    
+    return dll_open_excel(excel_file_name.encode('utf-8'))    
+
+def close_excel():
+    """
+    Closes an Excel file.
+
+    Arguments:
+    None.
+
+    Returns:
+    None.
+
+    Requires:
+    excel_to_df.dll or excel_to_df.so    
+
+    Version 0.1
+
+    """        
+    
+    return dll_close_excel()
 
 
-def ws_to_df(sheet_name, multi_thread=0):
+def ws_to_df(sheet_name):
     """
     Loads an Excel worksheet and converts to pandas dataframe.
 
@@ -128,20 +140,18 @@ def ws_to_df(sheet_name, multi_thread=0):
     Requires:
     Pandas, ctypes, io.StringIO, excel_to_df.dll
 
-    Version 0.2.5
+    Version 0.2.51
 
     """
     # Gets worksheet data
     
-    if (multi_thread==0):
-        tmp = dll_get_sheet(sheet_name.encode())
-    else:
-        tmp = dll_get_sheet_mt(sheet_name.encode())
+    tmp = dll_get_sheet_mt(sheet_name.encode('utf-8'))
     
     # If data exists, converts to Pandas dataframe
-    if (tmp!=None):
+    if  (tmp!=None and len(tmp)>0):
         return pd.read_csv(StringIO(tmp.decode('utf-8')),lineterminator='\n',header=None,sep=';',low_memory=False)
     else:    
+        print("Error trying to convert sheet to Pandas Dataframe")
         return -1
 
 
