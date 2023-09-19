@@ -34,9 +34,9 @@ conda install -c nbittencourt excel_to_dataframe
 
 To force specific python version, run one of the following:
 ```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.57=py39_0
-conda install -c nbittencourt excel_to_dataframe=0.2.57=py310_0
-conda install -c nbittencourt excel_to_dataframe=0.2.57=py311_0
+conda install -c nbittencourt excel_to_dataframe=0.2.58=py39_0
+conda install -c nbittencourt excel_to_dataframe=0.2.58=py310_0
+conda install -c nbittencourt excel_to_dataframe=0.2.58=py311_0
 ```
 
 #Basic usage:
@@ -66,7 +66,7 @@ ret = etd.open_excel(<excel_file_full_path>)
 my_pandas_dataframe_1 = etd.ws_to_df(<excel_worksheet_name_1>) 
 my_pandas_dataframe_2 = etd.ws_to_df(<excel_worksheet_name_2>) 
 
-# Closing an Excel Workbook:
+# Closing an Excel Workbook. This is mandatory to change from an Excel File to another.
 etd.close_excel()
 
 ```
