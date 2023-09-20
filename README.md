@@ -7,16 +7,17 @@ The code opens an Excel file, extracts data from selected worksheet and returns 
 This software is in testing phase. Feel free to test it out. If you want to share your experience, send me an email (nbittencourt@hotmail.com).
 
 # Performance:
-On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll was between 5 and 20 times faster than Pandas.
+On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll was between 4 and 30 times faster than Pandas.
 
-##Windows, Python:
+## Windows, Python:
 
 <img src="images/perf_windows_python.png" width="800"> 
 
-##Linux (Ubuntu), Python:
+## Linux (Ubuntu), Python:
 
 <img src="images/perf_linux_python.png" width="800">
 
+Notice that Linux benchmark was conducted on a virtual environment hosted by Windows. In a pure Linux machine, result must be better.
 
 # Python installation (Windows and Linux):
 
@@ -39,7 +40,7 @@ conda install -c nbittencourt excel_to_dataframe=0.2.58=py310_0
 conda install -c nbittencourt excel_to_dataframe=0.2.58=py311_0
 ```
 
-#Basic usage:
+# Basic usage:
 
 This example uses 'excel_to_pandas.py' to encapsulates library functions. 
 To access library functions directly, see the code in 'excel_to_pandas.py'.
