@@ -28,7 +28,7 @@ Python 3.9, 3.10 and 3.11 are supported.
 pip install excel-to-dataframe
 ```
 
-## Anaconda/Miniconda:
+## Anaconda/Miniconda (recommended):
 ```Python
 conda install -c nbittencourt excel_to_dataframe
 ```
