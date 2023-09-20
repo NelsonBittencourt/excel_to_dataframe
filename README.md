@@ -40,6 +40,10 @@ conda install -c nbittencourt excel_to_dataframe=0.2.58=py310_0
 conda install -c nbittencourt excel_to_dataframe=0.2.58=py311_0
 ```
 
+## Manually:
+You can copy the files from folder 'python' to your project folder (for Windows : 'excel_to_pandas.py' and 'excel_to_df.dll' , for Linux 'excel_to_pandas.py' and 'excel_to_df.so'). 
+
+
 # Basic usage:
 
 This example uses 'excel_to_pandas.py' to encapsulates library functions. 
