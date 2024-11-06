@@ -1,10 +1,10 @@
 # ****************************************************************
 # example.py
 # Python script showing dll usage and benchmarks.
-# Created by Nelson Rossi Goulart Bittencourt.
+# Created by Nelson Rossi Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 19/09/2023 (dd/mm/yyyy).
-# Version: 0.2.58
+# Last change: 04/11/2024 (dd/mm/yyyy).
+# Version: 0.2.59
 # License: MIT
 # ****************************************************************
 
@@ -148,10 +148,10 @@ def benchmarks(save_csvs=False):
     """
 
     # Excel files and worksheets for benchmarking
-    # excel_files = ['benchmarks//infomercado_individuais_2022.xlsx','benchmarks//infomercado_contratos.xlsx']
-    excel_files = ['benchmarks//infomercado_contratos.xlsx','benchmarks//infomercado_individuais_2022.xlsx']
-    # sheet_names  = ['003 Consumo','Contratos Distribuidoras']
-    sheet_names  = ['Contratos Distribuidoras','003 Consumo']
+    excel_files = ['benchmarks//infomercado_individuais_2022.xlsx','benchmarks//infomercado_contratos.xlsx']
+    #excel_files = ['benchmarks//infomercado_contratos.xlsx','benchmarks//infomercado_individuais_2022.xlsx']
+    sheet_names  = ['003 Consumo','Contratos Distribuidoras']
+    #sheet_names  = ['Contratos Distribuidoras','003 Consumo']
 
     for a in range(0,2):
         excel_file = os.path.join(absolute_path, excel_files[a])
@@ -166,10 +166,10 @@ def benchmarks(save_csvs=False):
         dll_time_mt = timeit.timeit("tmp_test(excel_file,sheet_name)", number=1,globals=locals())
         
         # 'tmp_test' is a local pointer to the function. Allows usage of 'timeit' inside functions.
-        tmp_test = test_pure_pandas
+        mp_test = test_pure_pandas
         pd_time = timeit.timeit("tmp_test(excel_file,sheet_name)", number=1, globals=locals())
                 
-        # Calculates the ratio pandas time / dll time.                
+        # Calculates the ratio pandas time / dll time.                        
         ratio_mt = pd_time/dll_time_mt
         
         # Prints resutls.

@@ -1,10 +1,10 @@
 # ****************************************************************
 # excel_to_pandas.py
 # Python script to test Excel to Pandas Dataframe DLL
-# Created by Nelson Rossi Goulart Bittencourt.
+# Created by Nelson Rossi Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 19/09/2023 (dd/mm/yyyy).
-# Version: 0.2.58
+# Last change: 04/11/2024 (dd/mm/yyyy).
+# Version: 0.2.59
 # License: MIT
 # ****************************************************************
 
