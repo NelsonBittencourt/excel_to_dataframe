@@ -34,9 +34,9 @@ conda install -c nbittencourt excel_to_dataframe
 
 To force specific python version, run one of the following:
 ```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.58=py39_0
-conda install -c nbittencourt excel_to_dataframe=0.2.58=py310_0
-conda install -c nbittencourt excel_to_dataframe=0.2.58=py311_0
+conda install -c nbittencourt excel_to_dataframe=0.2.59=py39_0
+conda install -c nbittencourt excel_to_dataframe=0.2.59=py310_0
+conda install -c nbittencourt excel_to_dataframe=0.2.59=py311_0
 conda install -c nbittencourt excel_to_dataframe=0.2.59=py312_0
 ```
 
