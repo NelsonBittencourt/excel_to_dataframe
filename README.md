@@ -7,7 +7,7 @@ The code opens an Excel file, extracts data from selected worksheet and returns 
 This software is in testing phase. Feel free to test it out. If you want to share your experience, send me an email (nbittencourt@hotmail.com).
 
 # Performance:
-On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll was between 5 and 20 times faster than Pandas.
+On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll/so was between 5 and 20 times faster than Pandas.
 
 ##Windows, Python:
 
@@ -24,7 +24,10 @@ Python 3.9, 3.10, 3.11 and 3.12 are supported.
 
 ## PyPI:
 ```Python
+
 pip install excel-to-dataframe
+
+
 ```
 
 ## Anaconda/Miniconda:
@@ -34,10 +37,10 @@ conda install -c nbittencourt excel_to_dataframe
 
 To force specific python version, run one of the following:
 ```Python
-conda install -c nbittencourt excel_to_dataframe=0.2.59=py39_0
-conda install -c nbittencourt excel_to_dataframe=0.2.59=py310_0
-conda install -c nbittencourt excel_to_dataframe=0.2.59=py311_0
-conda install -c nbittencourt excel_to_dataframe=0.2.59=py312_0
+conda install -c nbittencourt excel_to_dataframe=0.2.60=py39_0
+conda install -c nbittencourt excel_to_dataframe=0.2.60=py310_0
+conda install -c nbittencourt excel_to_dataframe=0.2.60=py311_0
+conda install -c nbittencourt excel_to_dataframe=0.2.60=py312_0
 ```
 
 #Basic usage:
