@@ -3,8 +3,8 @@
 # Python script showing dll usage and benchmarks.
 # Created by Nelson Rossi Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 04/11/2024 (dd/mm/yyyy).
-# Version: 0.2.59
+# Last change: 08/11/2024 (dd/mm/yyyy).
+# Version: 0.2.60
 # License: MIT
 # ****************************************************************
 
@@ -143,15 +143,15 @@ def benchmarks(save_csvs=False):
     Requires:
     Pandas, excel_to_df.dll, test_dll, test_pure_pandas.
 
-    Version 0.2.53
+    Version 0.2.54
 
     """
 
     # Excel files and worksheets for benchmarking
-    excel_files = ['benchmarks//infomercado_individuais_2022.xlsx','benchmarks//infomercado_contratos.xlsx']
-    #excel_files = ['benchmarks//infomercado_contratos.xlsx','benchmarks//infomercado_individuais_2022.xlsx']
-    sheet_names  = ['003 Consumo','Contratos Distribuidoras']
-    #sheet_names  = ['Contratos Distribuidoras','003 Consumo']
+    #excel_files = ['benchmarks//infomercado_individuais_2022.xlsx','benchmarks//infomercado_contratos.xlsx']
+    excel_files = ['benchmarks//infomercado_contratos.xlsx','benchmarks//infomercado_individuais_2022.xlsx']
+    #sheet_names  = ['003 Consumo','Contratos Distribuidoras']
+    sheet_names  = ['Contratos Distribuidoras','003 Consumo']
 
     for a in range(0,2):
         excel_file = os.path.join(absolute_path, excel_files[a])
@@ -164,22 +164,24 @@ def benchmarks(save_csvs=False):
         # 'tmp_test' is a local pointer to the function. Allows usage of 'timeit' inside functions.
         tmp_test = test_dll
         dll_time_mt = timeit.timeit("tmp_test(excel_file,sheet_name)", number=1,globals=locals())
-        
-        # 'tmp_test' is a local pointer to the function. Allows usage of 'timeit' inside functions.
-        mp_test = test_pure_pandas
-        pd_time = timeit.timeit("tmp_test(excel_file,sheet_name)", number=1, globals=locals())
                 
+
+        # 'tmp_test' is a local pointer to the function. Allows usage of 'timeit' inside functions.
+        tmp_test = test_pure_pandas
+        pd_time = timeit.timeit("tmp_test(excel_file,sheet_name)", number=1, globals=locals())
+        
+
         # Calculates the ratio pandas time / dll time.                        
         ratio_mt = pd_time/dll_time_mt
         
         # Prints resutls.
         print('')
-        print('**************************************************************************************************')
         print('Results:')
         print('')
         print('Pandas..................... {:.2f} seconds.'.format(pd_time))
-        print('DLL........................ {:.2f} seconds.'.format(dll_time_mt))
-        print('--> DLL is................. {:.2f} times faster than Pandas.'.format(ratio_mt))
+        print('Library (.dll or .so)...... {:.2f} seconds.'.format(dll_time_mt))
+        print('Libray is.................. {:.2f} times faster than Pandas.'.format(ratio_mt))
+        print('')
         print('')
         
 
@@ -199,7 +201,7 @@ def get_csvs(excel_file_full_path,excel_worksheet_name):
     Requires:
     Pandas, excel_to_df.dll.
 
-    Version 0.2.52
+    Version 0.2.53
     
     """
     
@@ -212,7 +214,7 @@ def get_csvs(excel_file_full_path,excel_worksheet_name):
     else:
         print("Error: Can't not open sheet: " + excel_worksheet_name)
     
-    a = etd.close_excel  
+    etd.close_excel()  
     
     del tmp_df
     
@@ -226,23 +228,22 @@ def get_csvs(excel_file_full_path,excel_worksheet_name):
 
 # *********** Entry point **********
 if __name__ == "__main__":
-    
    
-    # Gets and prints dll version.
+    # Gets and prints dll version
     print (etd.version())
     
-    # # Runs benchmarks
+    # Runs benchmarks
     benchmarks()
     exit(0)
 
-    #  Saves csvs to comparisons;
+    #  Saves csvs to comparisons
     print('')
     print('**************************************************************************************************')
     print('Converting worksheets to csvs:')
-    # get_csvs(os.path.join(absolute_path,'benchmarks/infomercado_individuais_2022.xlsx'), '003 Consumo')    
-    # get_csvs(os.path.join(absolute_path, 'benchmarks/infomercado_contratos.xlsx'), 'Notas Explicativas')                                                                    
-    # get_csvs(os.path.join(absolute_path, 'benchmarks/infomercado_contratos.xlsx'), 'Contratos Distribuidoras')
-    # print('Done!')
+    get_csvs(os.path.join(absolute_path,'benchmarks//infomercado_individuais_2022.xlsx'), '003 Consumo')    
+    get_csvs(os.path.join(absolute_path, 'benchmarks//infomercado_contratos.xlsx'), 'Notas Explicativas')                                                                    
+    get_csvs(os.path.join(absolute_path, 'benchmarks//infomercado_contratos.xlsx'), 'Contratos Distribuidoras')
+    print('Done!')
     
     # # Another dll usage example.
     # main()

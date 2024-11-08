@@ -3,8 +3,8 @@
 # Python script to test Excel to Pandas Dataframe DLL
 # Created by Nelson Rossi Bittencourt.
 # Github: https://github.com/nelsonbittencourt/excel_to_dataframe
-# Last change: 04/11/2024 (dd/mm/yyyy).
-# Version: 0.2.59
+# Last change: 08/11/2024 (dd/mm/yyyy).
+# Version: 0.2.60
 # License: MIT
 # ****************************************************************
 
@@ -36,11 +36,11 @@ dll_path = os.path.join(abs_path,dll_file)
 try:
     if (is_windows):
         wsdf_dll = ct.CDLL(dll_path)        
-    else:
-         wsdf_dll = ct.cdll.LoadLibrary(dll_path)         
-except OSError as e:
-    print('Error loading dll file! Error:' , e)
-    exit(-1)
+    else:        
+        wsdf_dll = ct.cdll.LoadLibrary(dll_path)                 
+except OSError as error:    
+        print('Error loading excel_to_dataframe library (dll/so) !' )
+        exit(-1)
     
 
 # 'Instantianting' dll functions
