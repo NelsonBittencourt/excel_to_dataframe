@@ -4,7 +4,7 @@ C++ Library to convert Excel worksheets to Pandas dataframes.
 The code opens an Excel file, extracts data from selected worksheet and returns a formatted string semicolon separated-values 
 (future version will include comma separated-values). This string can be easily handled by python/pandas.
 
-This software is in testing phase. Feel free to test it out. If you want to share your experience, send me an email (nbittencourt@hotmail.com).
+This software is in testing phase. Feel free to test it out. If you want to share your experience, send me an email (nbittencourt at hotmail dot com).
 
 # Performance:
 On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll/so was between 5 and 20 times faster than Pandas.
