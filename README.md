@@ -43,7 +43,7 @@ conda install -c nbittencourt excel_to_dataframe=0.2.60=py311_0
 conda install -c nbittencourt excel_to_dataframe=0.2.60=py312_0
 ```
 
-#Basic usage:
+# Basic usage:
 
 This example uses 'excel_to_pandas.py' to encapsulates library functions. 
 To access library functions directly, see the code in 'excel_to_pandas.py'.
