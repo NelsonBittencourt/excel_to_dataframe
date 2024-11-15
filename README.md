@@ -9,11 +9,11 @@ This software is in testing phase. Feel free to test it out. If you want to shar
 # Performance:
 On an old processor (Intel Core i7-4510U 2.60 GHz, 4 cores) and with 8Gb RAM, the dll/so was between 5 and 20 times faster than Pandas.
 
-##Windows, Python:
+## Windows, Python:
 
 <img src="images/perf_windows_python.png" width="800"> 
 
-##Linux (Ubuntu), Python:
+## Linux (Ubuntu), Python:
 
 <img src="images/perf_linux_python.png" width="800">
 
