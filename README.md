@@ -1,5 +1,6 @@
 # excel_to_dataframe:
-C++ Library to convert Excel worksheets to Pandas dataframes.
+
+A high performance C++ library to convert excel files to pandas dataframes.
 
 The code opens an Excel file, extracts data from selected worksheet and returns a formatted string semicolon separated-values 
 (future version will include comma separated-values). This string can be easily handled by python/pandas.
